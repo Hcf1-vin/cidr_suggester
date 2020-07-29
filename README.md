@@ -8,8 +8,6 @@ The cidr blocks are 10.{x}.0.0/16. Where x is incremented until an unused cidr b
 
 # Running the script
 
-This script has much fewer moving parts as it builds a list of used cidr blocks using the AWS boto3 SDK
-
 ```
 pip install -r requirements.txt
 ```
