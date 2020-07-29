@@ -22,14 +22,17 @@ def get_aws_profiles():
 def get_cidr_blocks():
     try:
         c_blocks = list()
-        for aws_profile in get_aws_profiles():
-            sesssion = boto3.Session(profile_name=aws_profile, region_name="eu-west-1")
-            ec2_client = sesssion.client("ec2")
+        aws_regions = ["eu-west-1", "eu-west-2"]
 
-            r = ec2_client.describe_vpcs()
-            for vpc in r["Vpcs"]:
-                for network in vpc["CidrBlockAssociationSet"]:
-                    c_blocks.append(network["CidrBlock"])
+        for aws_profile in get_aws_profiles():
+            for region in aws_regions:
+                sesssion = boto3.Session(profile_name=aws_profile, region_name=region)
+                ec2_client = sesssion.client("ec2")
+
+                r = ec2_client.describe_vpcs()
+                for vpc in r["Vpcs"]:
+                    for network in vpc["CidrBlockAssociationSet"]:
+                        c_blocks.append(network["CidrBlock"])
         return c_blocks
     except:
         raise Exception("Error getting list of cidr blocks from aws")
