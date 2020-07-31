@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```
 
 ```
-python aws.py
+python main.py
 ```
 
 ## sample output
