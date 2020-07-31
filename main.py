@@ -46,12 +46,16 @@ def get_cidr_blocks():
 
 def create_range():
     try:
+        cidr_blocks = get_cidr_blocks()
+
         cidr_notation = 16
-        starting_range = "10.0.0.0"
         upper_limit = 255
+        starting_range = "10.0.0.0"
         starting_range_split = starting_range.split(".")
+
         r_count = 0
         range_used = True
+
         while range_used == True or r_count == 255:
 
             new_range = f"{starting_range_split[0]}.{r_count}.{starting_range_split[2]}.{starting_range_split[3]}/{cidr_notation}"
@@ -71,7 +75,4 @@ def create_range():
 
 
 if __name__ == "__main__":
-    cidr_blocks = get_cidr_blocks()
-
-    new_range = create_range()
-    print(new_range)
+    print(create_range())
